@@ -82,6 +82,9 @@ EXTRA_REQUIRES = {
         "black",
         "isort",
     ],
+    "tasks": [
+        "invoke",
+    ],
 }
 
 # full list of Classifiers at
