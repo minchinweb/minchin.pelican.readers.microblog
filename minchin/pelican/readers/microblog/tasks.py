@@ -5,13 +5,14 @@ Supporting invoke tasks.
 from pathlib import Path
 
 from minchin.pelican.readers.microblog import __version__
+from minchin.pelican.readers.microblog.constants import LOG_PREFIX
 
 
 try:
     from invoke import task
     import minchin.text as text
 except ImportError:
-    pass
+    raise ImportError(f"{LOG_PREFIX} Install `invoke` and `minchin.text` to use interactive post creation.")
 
 
 @task
@@ -23,28 +24,28 @@ def new_upost(ctx):
     # TODO: Allow setting the configuration file from the command line
     try:
         from pelicanconf import CONTENT
-    else:
+    except ImportError:
         CONTENT = "content"
 
-    try:
-        from pelicanconf import POST_FOLDER
-    else:
-        POST_FOLDER = "posts"
+    # try:
+    #     from pelicanconf import POST_FOLDER
+    # else:
+    #     POST_FOLDER = "posts"
 
     try:
         from pelicanconf import MICROBLOG_FOLDER
-    else:
-        from minchin.pelican.readers.microblog.constants importbDEFAULT_MICROBLOG_FOLDER as MICROBLOG_FOLDER
+    except ImportError:
+        from minchin.pelican.readers.microblog.constants import DEFAULT_MICROBLOG_FOLDER as MICROBLOG_FOLDER
 
     try:
         from pelicanconf import AUTHOR
-    else:
+    except ImportError:
         # import default author from Pelican
-        AUTHOR = ""
+        AUTHOR = None
 
     try:
         from pelicanconf import TZ
-    else:
+    except ImportError:
         TZ = "UTC"
 
 
