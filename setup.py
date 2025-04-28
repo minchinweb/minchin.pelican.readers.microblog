@@ -84,6 +84,7 @@ EXTRA_REQUIRES = {
     ],
     "tasks": [
         "invoke",
+        "minchin.text",
     ],
 }
 
