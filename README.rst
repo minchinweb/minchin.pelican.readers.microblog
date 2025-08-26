@@ -27,8 +27,7 @@ Pelican Microblogging
 Quickstart
 ----------
 
-1. Install the plugin via pip: ``pip install
-   minchin.pelican.readers.microblogging``
+1. Install the plugin via pip: ``pip install minchin.pelican.readers.microblog``
 2. Generally, the plugin should be loaded and configured automatically without
    further effort on your part.
 3. Create a ``micro`` folder in your content folder (to hold your micro blog
@@ -116,7 +115,7 @@ Requirements
 autoloading). If this plugin is installed from PyPI, these should automatically
 be installed.
 
-if you need to insrall them manually:
+If you need to insrall them manually:
 
 .. code-block:: sh
 
@@ -207,7 +206,7 @@ Integration with Themes
 -----------------------
 
 For best support, you will need to modify your theme, or select a theme that
-already supports *Microblogging*, like my `seafoam
+already supports *Microblogging*, like my `Seafoam
 <http://blog.minchin.ca/label/seafoam/>`_.
 
 Some helpful notes:
@@ -268,9 +267,6 @@ Known Issues
   changes. This can mean that the microblog post is "short" enough when
   reviewing your site locally, but not when the site is generated for
   publication.
-- microposts seem to mess up the ordering of the ``articles`` list passed to
-  the templating engine. Use ``dates`` instead (which is sorted by date)? -- `Issue 8
-  <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/8>`_
 - linking to internal content from microposts (i.e.
   `{filename}../regular-post.md`) crashes Pelican -- `Issue 9
   <https://github.com/MinchinWeb/minchin.pelican.readers.microblog/issues/9>`_
