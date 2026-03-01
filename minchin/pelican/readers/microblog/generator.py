@@ -46,7 +46,7 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         post = settings["PATH"] + os.sep + post
 
         content, metadata = myMarkdownReader.read(source_path=post)
-        # count lenght on content before adding tag and image links
+        # count length on content before adding tag and image links
         linkless_content = content
 
         new_article_metadata = {
@@ -117,13 +117,12 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         if post_len > settings["MICROBLOG_MAX_LENGTH"] + 6:
             relative_filename = post.removeprefix(settings["PATH"])
             logger.warning(
-                '%s micropost "%s" longer than expected (%s > %s).'
-                % (
-                    LOG_PREFIX,
-                    relative_filename,
-                    post_len,
-                    settings["MICROBLOG_MAX_LENGTH"],
-                )
+                '%s micropost "%s" longer than expected (%s > %s).',
+                LOG_PREFIX,
+                relative_filename,
+                post_len,
+                settings["MICROBLOG_MAX_LENGTH"],
+
             )
         new_article_metadata["char_len"] = post_len
 
@@ -143,9 +142,9 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         _micropost_count += 1
 
     # apply sorting
-    logger.debug(f'{LOG_PREFIX} sorting order: "{settings.get("ARTICLE_ORDER_BY", "reversed-date")}"')
-    articleGenerator.articles = order_content(
-        articleGenerator.articles, settings.get("ARTICLE_ORDER_BY", "reversed-date")
+    logger.debug('%s sorting order: "%s"', LOG_PREFIX, settings.get("ARTICLE_ORDER_BY", "reversed-date"))
+    self.articles = order_content(
+        self.articles, settings.get("ARTICLE_ORDER_BY", "reversed-date")
     )
 
 
