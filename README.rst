@@ -102,7 +102,7 @@ about presentation that start to fail as the posts get longer....
 Installation
 ------------
 
-The easiest way to installed *Microblogging* is through ``pip``:
+The easiest way to install *Microblogging* is through ``pip``:
 
 .. code-block:: sh
 
@@ -115,7 +115,7 @@ Requirements
 autoloading). If this plugin is installed from PyPI, these should automatically
 be installed.
 
-If you need to insrall them manually:
+If you need to install them manually:
 
 .. code-block:: sh
 
@@ -170,9 +170,9 @@ ARTICLE_ORDER_BY = "reverse-date"
    Sorting order for micro blog posts (also used for sorting posts generally);
    micro posts will be sorted among all posts. (Regular Pelican setting)
 AUTHOR
-    Default author for micro blog posts. Can be overwritten by the metadata at
-    the top of individual posts. (Regular Pelican setting; you don't have to
-    supply an author.)
+   Default author for micro blog posts. Can be overwritten by the metadata at
+   the top of individual posts. (Regular Pelican setting; you don't have to
+   supply an author.)
 MICROBLOG_APPEND_HASHTAGS = True
    Tags gets appended at the end of the micro blog post as hashtags.
    *#taggedyou*  Tags have the CSS class ``.microblog-post-tag`` applied, if
