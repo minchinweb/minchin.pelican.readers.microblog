@@ -25,10 +25,10 @@ logger = logging.getLogger(__name__)
 _micropost_count = 0
 
 
-def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
+def addMicroArticle(self: ArticlesGenerator) -> None:
     global _micropost_count
 
-    settings = articleGenerator.settings
+    settings = self.settings
 
     # Author, category, and tags are objects, not strings, so they need to
     # be handled using myBaseReader's process_metadata() function.
@@ -40,12 +40,12 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         "txt",
     ] + MarkdownReader.file_extensions
 
-    for post in articleGenerator.get_files(
+    for post_filename in self.get_files(
         paths=settings["MICROBLOG_FOLDER"], extensions=file_extensions
     ):
-        post = settings["PATH"] + os.sep + post
+        post_full_filename = settings["PATH"] + os.sep + post_filename
 
-        content, metadata = myMarkdownReader.read(source_path=post)
+        content, metadata = myMarkdownReader.read(source_path=post_full_filename)
         # count length on content before adding tag and image links
         linkless_content = content
 
@@ -115,7 +115,7 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         post_len = len(safe_content)
         # why the plus six here??
         if post_len > settings["MICROBLOG_MAX_LENGTH"] + 6:
-            relative_filename = post.removeprefix(settings["PATH"])
+            relative_filename = post_full_filename.removeprefix(settings["PATH"])
             logger.warning(
                 '%s micropost "%s" longer than expected (%s > %s).',
                 LOG_PREFIX,
@@ -136,9 +136,19 @@ def addMicroArticle(articleGenerator: ArticlesGenerator) -> None:
         new_article = Article(
             content,
             new_article_metadata,
+            settings=self.settings,
+            context=self.context,
         )
 
-        articleGenerator.articles.insert(0, new_article)
+        # `source_path` is needed as an attribute, rather than part of the
+        # metadata
+        new_article.source_path = metadata["source_path"] = post_filename
+
+        # these should be run by the generator, rather than here
+        self.add_source_path(new_article)
+        self.add_static_links(new_article)
+
+        self.articles.insert(0, new_article)
         _micropost_count += 1
 
     # apply sorting

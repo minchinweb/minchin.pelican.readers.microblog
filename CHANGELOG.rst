@@ -5,6 +5,8 @@ Changelog
 
 .. this is in "release" (for Sphinx) format
 
+- :bug:`9` Allow linking from and to microposts.
+
 - :release:`1.3.0 <2024-10-01>`
 - :bug:`- major` Ignore appended (hash)tags and featured image links in
   determining post length. C.f. `Issue #1
