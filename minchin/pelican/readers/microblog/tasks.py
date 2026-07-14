@@ -2,6 +2,7 @@
 Supporting invoke tasks.
 """
 
+import datetime
 import sys
 from pathlib import Path
 
@@ -11,6 +12,7 @@ from minchin.pelican.readers.microblog.constants import LOG_PREFIX
 
 try:
     from invoke import task
+
     from minchin.text import title, subtitle, query_yes_no, ANSWERS
 except ImportError:
     raise ImportError(f"{LOG_PREFIX} Install `invoke` and `minchin.text` to use interactive post creation.")
@@ -53,7 +55,7 @@ def new_upost(ctx):
     title(f"Micropost Reader, v{__version__}")
     subtitle("Interactive micropost creator")
 
-    default_folder = Path(CONTENT) / POST_FOLDER / MICROBLOG_FOLDER
+    default_folder = Path(CONTENT) / MICROBLOG_FOLDER
     my_folder = input(f"Micropost folder? [{default_folder}] ")
     if my_folder is None:
         my_folder = default_folder
@@ -64,7 +66,7 @@ def new_upost(ctx):
     if my_fn is None:
         my_fn = default_fn
 
-    q_image = text.query_yes_no("Include image?", default="no")
+    q_image = query_yes_no("Include image?", default="no")
     # add ask for image_fn
 
     post_body = input("Micropost body: ")
