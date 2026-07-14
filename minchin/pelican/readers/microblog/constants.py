@@ -1,5 +1,5 @@
 __title__ = "minchin.pelican.readers.microblog"
-__version__ = "1.3.1-dev"
+__version__ = "1.3.1"
 __description__ = "Microblogging for Pelican"
 __author__ = "W. Minchin"
 __email__ = "w_minchin@hotmail.com"
